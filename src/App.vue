@@ -30,6 +30,11 @@
    margin-left: 50px;
  }
 
+   .order button {
+    margin-top: 100px;
+    padding: 0 50px;
+  }
+
  
   nav .brand-logo {
     position:inherit;
