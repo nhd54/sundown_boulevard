@@ -36,6 +36,10 @@
 
 }
 
+h2, h3 {
+  font-size: 28px;
+}
+
 .primary-background-color{
    background-color:#BA2329;
 }
