@@ -17,8 +17,9 @@
         
 
        <div class="order col offset-s2 s4">
-          <h2> Pick a Order <br> Pick a drink <br> finish </h2>
+          <h2> {{ meal }} <br> Pick a drink <br> finish </h2>
           <router-link to="/order" class="btn-large primary-background-color center">Next!</router-link>
+          <button class="btn-large primary-background-color center" @click="handleClick">Next!</button>
       </div> 
 
   </div>
@@ -27,21 +28,38 @@
 <script>
 
 import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import getDrinks from '../composables/getDrinks'
 
 export default {
     name: 'Drinks',
-    setup() {
+    
+    setup(props) {
+
+        const route = useRoute();
+        const router = useRouter();
+
+        const meal = ref(route.params.meal)
+        const orderdDrinks = ref([])
+
+        const handleClick = () => {
+            router.push({ name: 'Order', params: { meal: meal.value, drinks: orderdDrinks.value } })
+        }
+
+
 
         const { drinks, error, load } = getDrinks()
         const ordered = (e) => {
+            console.log(e.target.children[2].textContent)
          if(e.path[0].classList.contains('card-panel')){
              if(e.path[0].classList.contains('ordered'))
              {
                 e.path[0].classList.remove('ordered')
              }
              else {
-             e.path[0].classList.add('ordered')
+                orderdDrinks.value.push(e.target.children[2].textContent)
+                e.path[0].classList.add('ordered')
+                console.log(orderdDrinks.value)
              }
          }
 
@@ -49,7 +67,7 @@ export default {
 
         load()
 
-        return {drinks, ordered}
+        return {drinks, ordered, meal, handleClick}
     }
 
 }

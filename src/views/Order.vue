@@ -7,9 +7,10 @@
                         
                     
                     <span class="col s6"> 
-                        <h3 class="left">Finish Order</h3>
-                        <input type="text" placeholder="Pick a date" class="datepicker">
-                        <input type="text" placeholder="Pick a time" class="timepicker">
+                        <h3 class="left">Finish Order - {{ orderedDate }}</h3>
+                       
+                        <input type="text" placeholder="Pick a date" v-model.lazy="orderedDate" class="datepicker">
+                        <input type="text" placeholder="Pick a time" v-model.lazy="orderedTime" class="timepicker">
                     </span>
                     <span class="col s6">
                         <button class="btn primary-background-color" @click="persons--">Decrease</button>
@@ -17,11 +18,11 @@
                          <button class="btn primary-background-color" @click="persons++">Increase</button>  
 
                          <label>Enter Email:</label> 
-                         <input type="text">
+                         <input type="text" v-model="email">
                     </span>
 
                     <div class="col s12">
-                        <button class="btn-large primary-background-color right">Order!</button>
+                        <button @click="handleClick" class="btn-large primary-background-color right">Order!</button>
                     </div>
                 </div>
             </div>
@@ -32,7 +33,9 @@
 <script>
 
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
+import Recipts from '../composables/recipt'
 export default {
     name: 'Order',
      mounted() {
@@ -45,10 +48,29 @@ export default {
   
   },
     setup(){
-     const persons = ref(0)
+    const { recipts, createRecipt } = Recipts()
+    const route = useRoute();
+    const router = useRouter();
+
+    const persons = ref(1)
+    const email = ref('')
+    const orderedDate = ref()
+    const orderedTime = ref()
     
-    
-     return {persons}
+
+        const handleClick = () => {  
+            const recipt = {
+            id: Math.floor(Math.random() * 10000),
+            email: email.value,
+            date: orderedDate.value,
+            time: orderedTime.value,
+            amount: persons.value,
+            order: route.params
+          } 
+
+        createRecipt(recipt);
+       }
+     return {persons, orderedDate, orderedTime, email, handleClick}
     }
 
 }

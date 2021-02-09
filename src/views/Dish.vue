@@ -19,24 +19,32 @@
 
       <div class="order col s4">
           <h2> Pick a Order <br> Pick a drink <br> finish </h2>
-          <router-link to="/drinks" class="btn-large primary-background-color center">Next!</router-link>
+        <!--  <router-link to="/drinks" class="btn-large primary-background-color center">Next!</router-link> -->
+        <button class="btn-large primary-background-color center" @click="handleClick">Next!</button>
       </div>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
 import getDish from '../composables/getDish'
+
 export default {
    name: 'Dish',
    setup() {
-
         const { dish, error, load } = getDish()
-        
+        const router = useRouter()
+        console.log(router)
         load()
 
+        const handleClick = () => {
+            router.push({ name: 'Drinks', params: { meal: dish.value.meals[0].strMeal } })
+        }
+
         console.log(dish)
-       return {dish, load}
+       return {dish, load, handleClick}
    }
 }
 </script>
