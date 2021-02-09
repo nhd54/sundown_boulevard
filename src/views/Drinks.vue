@@ -18,7 +18,7 @@
 
        <div class="order col offset-s2 s4">
           <h2> Pick a Order <br> Pick a drink <br> finish </h2>
-          <router-link to="/drinks" class="btn-large primary-background-color center">Next!</router-link>
+          <router-link to="/order" class="btn-large primary-background-color center">Next!</router-link>
       </div> 
 
   </div>

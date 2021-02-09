@@ -2,14 +2,14 @@
   <main>
    <nav class="primary-background-color">
     <div class="nav-wrapper container">
-      <a href="#" class="brand-logo left">
+      <a href="/" class="brand-logo left">
          <img src="images/beach.png"/>
       </a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="sass.html">Resturanter</a></li>
-        <li><a href="badges.html">Produkter</a></li>
-        <li><a href="collapsible.html">Nyhedsbrev</a></li>
-        <li><a href="collapsible.html">Kontakt</a></li>
+        <li><a href="#">Resturanter</a></li>
+        <li><a href="#">Produkter</a></li>
+        <li><a href="#">Nyhedsbrev</a></li>
+        <li><a href="#">Kontakt</a></li>
       </ul>
     </div>
   </nav>
