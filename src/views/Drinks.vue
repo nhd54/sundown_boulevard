@@ -1,55 +1,18 @@
 <template>
   <div class="container drinks row">
-        <div class="row col s6">
-         
-            <div class="col s6" @click="ordered = !ordered">
-                    <div class="card-panel  row">
-                        <div class="card-image col s6">
-                            <img src="https://images.punkapi.com/v2/2.png">
-                        </div>     
-                        <span class="black-text col s6">
-                            <img src="images/tick.png" alt="">
-                        </span>
-                        <span class="col s12 name">{{ordered}}</span>
-                    </div>
-                </div>
-
-            <div class="col s6"  @click="ordered = !ordered">
-                    <div class="card-panel  row">
-                        <div class="card-image col s6">
-                            <img src="https://images.punkapi.com/v2/2.png">
-                        </div>     
-                        <span class="black-text col s6">
-                            <img src="images/tick.png" alt="">
-                        </span>
-                        <span class="col s12 name">{{ordered}}</span>
-                    </div>
-                </div>
-
-            <div class="col s6">
-                    <div class="card-panel  row">
-                        <div class="card-image col s6">
-                            <img src="https://images.punkapi.com/v2/2.png">
-                        </div>     
-                        <span class="black-text col s6">
-                            <img src="images/tick.png" alt="">
-                        </span>
-                        <span class="col s12 name">test</span>
-                    </div>
-                </div>
-
-            <div class="col s6">
-                    <div class="card-panel  row">
-                        <div class="card-image col s6">
-                            <img src="https://images.punkapi.com/v2/2.png">
-                        </div>     
-                        <span class="black-text col s6">
-                            <img src="images/tick.png" alt="">
-                        </span>
-                        <span class="col s12 name">test</span>
-                    </div>
-                </div>
+    <div class="row col s6">
+        <div class="col s6" v-for="drink in drinks" :key="drink.id" @click="ordered">
+            <div class="card-panel  row">
+                <div class="card-image col s6">
+                    <img :src="drink.image_url">
+                </div>     
+                <span class="black-text col tick s6">
+                    <img src="images/tick.png" alt="">
+                </span>
+                <span class="col s12 name">{{drink.name}} </span>
             </div>
+        </div>
+    </div>
 
         
 
@@ -63,20 +26,47 @@
 
 <script>
 
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import getDrinks from '../composables/getDrinks'
+
 export default {
     name: 'Drinks',
     setup() {
 
-        const ordered = ref([])
+        const { drinks, error, load } = getDrinks()
+        const ordered = (e) => {
+         if(e.path[0].classList.contains('card-panel')){
+             if(e.path[0].classList.contains('ordered'))
+             {
+                e.path[0].classList.remove('ordered')
+             }
+             else {
+             e.path[0].classList.add('ordered')
+             }
+         }
 
-        return {ordered}
+        }
+
+        load()
+
+        return {drinks, ordered}
     }
 
 }
 </script>
 
 <style>
+    .card-panel {
+        min-height: 223px;
+    }
+
+    .tick {
+        display:none;
+    }
+
+    .ordered .tick {
+        display: block;
+    }
 
    .card-panel img {
         width:40%;

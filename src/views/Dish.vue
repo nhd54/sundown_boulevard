@@ -1,22 +1,20 @@
 <template>
   <div class="container dish row">
      <div class="row col s8">
-    <div class="col s10">
-      <div class="card">
+    <div class="col s10" >
+      <div class="card" v-for="dish in dish.meals" :key="dish.idMeal">
         <div class="card-image">
           <img src="images/logo.svg">
-          <span class="card-title">Card Title</span>
+          <br>
+          <span class="card-title black-text">{{ dish.strMeal }} </span>
         </div>
         <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+          <p>{{ dish.strInstructions }}</p>
         </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>
+   
       </div>
     </div>
-    <button class="btn-large primary-background-color col offset-s7 s3">Generate New</button>
+    <button @click="load" class="btn-large primary-background-color col offset-s7 s3">Generate New</button>
   </div>
 
       <div class="order col s4">
@@ -27,11 +25,18 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import getDish from '../composables/getDish'
 export default {
    name: 'Dish',
    setup() {
 
-       return {}
+        const { dish, error, load } = getDish()
+        
+        load()
+
+        console.log(dish)
+       return {dish, load}
    }
 }
 </script>
