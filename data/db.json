@@ -1,0 +1,47 @@
+{
+  "recipts": [
+    {
+      "amount": 2,
+      "date": "Feb 01, 2021",
+      "email": "nicklasdegnebolig@gmail.com",
+      "id": 8864,
+      "order": [
+        {
+          "meal": "White chocolate creme brulee",
+          "drinks": [
+            "buzz",
+            "trashy Blonde",
+            "Berliner Weisse With yuzu - B-sides"
+          ]
+        }
+      ],
+      "time": "05:00 PM"
+    },
+    {
+      "email": "test",
+      "amount": 1,
+      "order": {
+        "meal": "Bakewell tart",
+        "drinks": [
+          "Pilsen Lager"
+        ]
+      },
+      "id": 8865
+    },
+    {
+      "email": "tobias@tobias.com",
+      "date": "Feb 01, 2021",
+      "time": "06:22 PM",
+      "amount": 4,
+      "order": {
+        "meal": "Szechuan Beef",
+        "drinks": [
+          "Pilsen Lager",
+          "Berliner Weisse With Yuzu - B-Sides",
+          "Avery Brown Dredge"
+        ]
+      },
+      "id": 8866
+    }
+  ]
+}

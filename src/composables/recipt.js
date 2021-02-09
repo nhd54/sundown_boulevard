@@ -1,29 +1,36 @@
 import { ref } from 'vue'
-
-
+import  axios from 'axios'
 const Recipts = () => {
 
-  const recipts = ref([
-      {
-        id: 1720,
-        amount: 3,
-        date: "Feb 01, 2021",
-        email: "nicklasdegnebolig@gmail.com",
-        order: {meal: "Garides Saganaki"},
-        time: "05:46 PM"
-      }
-  ])
-
-
+  const recipts = ref([])
+  const currentRecipe = ref([])
+  const error = ref(null)
+  
   const createRecipt =  (recipt) => {
-      recipts.value.push(recipt)
+      axios.post('http://localhost:3000/recipts', recipt).then((response) => {
+         console.log(response);
+      }).catch((err) => {
+          console.log(err)
+      })
 
-      console.log(recipts.value)
+  }
+
+
+  const load =  (emails) => {
+    axios('http://localhost:3000/recipts').then((response) => {   
+      let res = response.data
+       return currentRecipe.value = res.filter((r) => {
+          return r.email.includes(emails)
+       })     
+    }).catch((err) => {
+        console.log(err);
+    })
+   
   }
 
  
 
-  return { recipts, createRecipt }
+  return { recipts, createRecipt, currentRecipe, error, load }
 }
 
 export default Recipts

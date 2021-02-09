@@ -50,7 +50,6 @@ export default {
 
         const { drinks, error, load } = getDrinks()
         const ordered = (e) => {
-            console.log(e.target.children[2].textContent)
          if(e.path[0].classList.contains('card-panel')){
              if(e.path[0].classList.contains('ordered'))
              {
@@ -59,7 +58,6 @@ export default {
              else {
                 orderdDrinks.value.push(e.target.children[2].textContent)
                 e.path[0].classList.add('ordered')
-                console.log(orderdDrinks.value)
              }
          }
 

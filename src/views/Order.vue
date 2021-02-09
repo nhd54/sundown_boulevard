@@ -7,7 +7,7 @@
                         
                     
                     <span class="col s6"> 
-                        <h3 class="left">Finish Order - {{ orderedDate }}</h3>
+                        <h3 class="left">Finish Order</h3>
                        
                         <input type="text" placeholder="Pick a date" v-model.lazy="orderedDate" class="datepicker">
                         <input type="text" placeholder="Pick a time" v-model.lazy="orderedTime" class="timepicker">
@@ -60,16 +60,16 @@ export default {
 
         const handleClick = () => {  
             const recipt = {
-            id: Math.floor(Math.random() * 10000),
             email: email.value,
             date: orderedDate.value,
             time: orderedTime.value,
             amount: persons.value,
             order: route.params
           } 
-
-        createRecipt(recipt);
+      createRecipt(recipt); 
+      router.push({name: 'Recipt', params: {email: recipt.email}})
        }
+
      return {persons, orderedDate, orderedTime, email, handleClick}
     }
 

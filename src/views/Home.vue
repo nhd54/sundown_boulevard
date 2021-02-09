@@ -19,8 +19,8 @@
           <h3>Find your order right here!</h3>
 
           <label class="left">Enter Email:</label>
-          <input type="text">
-          <button class="btn-large primary-background-color right">Find</button>
+          <input type="text" v-model="email">
+          <button class="btn-large primary-background-color right" @click="handleClick">Find</button>
           
       </div>
       <div class="content col s6">Content</div>
@@ -28,18 +28,26 @@
 </template>
 
 <script>
-
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   name: 'Home',
   mounted() {
-     document.addEventListener('DOMContentLoaded', function() {
         let elems = document.querySelectorAll('.carousel');
         let instances = M.Carousel.init(elems);
-          });
+
   },
   setup() {
+    const router = useRouter();
+    const email = ref('')
 
-    return {}
+    const handleClick = () => {
+      
+      router.push({name: 'Recipt', params:{email: email.value}})
+
+    }
+
+    return {email, handleClick}
   }
 }
 </script>
