@@ -18,7 +18,6 @@
 
        <div class="order col offset-s2 s4">
           <h2> {{ meal }} <br> Pick a drink <br> finish </h2>
-          <router-link to="/order" class="btn-large primary-background-color center">Next!</router-link>
           <button class="btn-large primary-background-color center" @click="handleClick">Next!</button>
       </div> 
 
@@ -54,6 +53,12 @@ export default {
              if(e.path[0].classList.contains('ordered'))
              {
                 e.path[0].classList.remove('ordered')
+                let index = orderdDrinks.value.indexOf(e.target.children[2].textContent)
+                
+                if (index > -1) {
+                orderdDrinks.value.splice(index, 1);
+                }
+                
              }
              else {
                 orderdDrinks.value.push(e.target.children[2].textContent)
